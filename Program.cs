@@ -1,3 +1,4 @@
+using musictwins_api.Mapping;
 using musictwins_api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,8 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<LastFmService>();
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<UserProfileMapper>();
+    cfg.AddProfile<TopArtistsMapper>();
+
+});
+builder.Services.AddControllers();
+
 
 var app = builder.Build();
 
@@ -17,6 +25,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 var summaries = new[]
 {
