@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddHttpClient<LastFmService>();
+builder.Services.AddHttpClient<SpotifyService>();
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile<UserProfileMapper>();
